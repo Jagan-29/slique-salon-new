@@ -8,7 +8,7 @@
 // On Vercel: update this to your Render backend URL
 const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000/api'
-  : 'https://slique-salon-backend.onrender.com/api'; // ← update after Render deploy
+  : 'https://sliquesalon.onrender.com/api'; // ← update after Render deploy
 
 /* ── State ─────────────────────────────────────────────── */
 let currentUser = null;
