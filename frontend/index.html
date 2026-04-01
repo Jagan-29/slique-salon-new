@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Slique Unisex Salon – Bengaluru</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo" onclick="scrollToSection('#home')">
+    <span class="logo-sl">Sl</span><span class="logo-ique">ique</span>
+    <span class="logo-sub">UNISEX SALON</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home"     class="nav-link active" onclick="navClick(event,'#home')">Home</a></li>
+    <li><a href="#services" class="nav-link"        onclick="navClick(event,'#services')">Services</a></li>
+    <li><a href="#booking"  class="nav-link"        onclick="navClick(event,'#booking')">Book Now</a></li>
+    <li><a href="#about"    class="nav-link"        onclick="navClick(event,'#about')">About</a></li>
+    <li><a href="#contact"  class="nav-link"        onclick="navClick(event,'#contact')">Contact</a></li>
+  </ul>
+  <div class="nav-auth" id="navAuth">
+    <button class="btn-ghost" onclick="openModal('loginModal')">Login</button>
+    <button class="btn-solid" onclick="openModal('registerModal')">Register</button>
+  </div>
+  <div class="nav-user hidden" id="navUser">
+    <span class="user-greeting" id="userGreeting"></span>
+    <button class="btn-ghost" id="dashboardBtn" onclick="openDashboard()">My Bookings</button>
+    <div class="nav-menu-wrap" id="navMenuWrap">
+      <button class="btn-icon" onclick="toggleUserMenu()" title="Account settings">⚙</button>
+      <div class="user-dropdown hidden" id="userDropdown">
+        <button onclick="openModal('changePwModal');closeUserMenu()">🔑 Change Password</button>
+        <button onclick="logout()">🚪 Logout</button>
+      </div>
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-circle c1"></div>
+    <div class="hero-circle c2"></div>
+    <div class="hero-grain"></div>
+  </div>
+  <div class="hero-content">
+    <p class="eyebrow">Est. in Bengaluru</p>
+    <h1 class="hero-title">Beauty is<br/><em>an experience,</em><br/>not a service.</h1>
+    <p class="hero-desc">Slique Unisex Salon — where artistry meets care.<br/>Premium hair, skin &amp; wellness in Thirumenahalli.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="scrollToSection('#booking')">Book Appointment</button>
+      <button class="btn-outline" onclick="scrollToSection('#services')">Explore Services</button>
+    </div>
+  </div>
+  <div class="hero-badge"><div class="badge-inner"><span class="b-num">12+</span><span class="b-txt">Services</span></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Haircut &amp; Styling</span><span class="dot">✦</span><span>Hair Colour</span><span class="dot">✦</span><span>Keratin Treatment</span><span class="dot">✦</span><span>Facial</span><span class="dot">✦</span><span>Waxing</span><span class="dot">✦</span><span>Manicure</span><span class="dot">✦</span><span>Pedicure</span><span class="dot">✦</span><span>Bridal Makeup</span><span class="dot">✦</span><span>Body Spa</span><span class="dot">✦</span><span>Head Massage</span><span class="dot">✦</span>
+    <span>Haircut &amp; Styling</span><span class="dot">✦</span><span>Hair Colour</span><span class="dot">✦</span><span>Keratin Treatment</span><span class="dot">✦</span><span>Facial</span><span class="dot">✦</span><span>Waxing</span><span class="dot">✦</span><span>Manicure</span><span class="dot">✦</span><span>Pedicure</span><span class="dot">✦</span><span>Bridal Makeup</span><span class="dot">✦</span><span>Body Spa</span><span class="dot">✦</span><span>Head Massage</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow">What we offer</p>
+      <h2 class="section-title">Our Services</h2>
+    </div>
+    <div class="cat-tabs" id="categoryTabs">
+      <button class="tab-btn active" data-cat="all">All</button>
+      <button class="tab-btn" data-cat="hair">Hair</button>
+      <button class="tab-btn" data-cat="skin">Skin</button>
+      <button class="tab-btn" data-cat="nails">Nails</button>
+      <button class="tab-btn" data-cat="makeup">Makeup</button>
+      <button class="tab-btn" data-cat="spa">Spa</button>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <div class="loader-inline">Loading services…</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="section section-dark" id="booking">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow">Reserve your visit</p>
+      <h2 class="section-title">Book an Appointment</h2>
+    </div>
+    <div class="booking-wrap">
+      <div class="booking-info">
+        <h3>Why choose Slique?</h3>
+        <ul class="perks">
+          <li><span class="perk-dot">✦</span>Expert stylists with 5+ years experience</li>
+          <li><span class="perk-dot">✦</span>Premium international products</li>
+          <li><span class="perk-dot">✦</span>Hygienic, air-conditioned studio</li>
+          <li><span class="perk-dot">✦</span>Unisex — welcome for all genders</li>
+          <li><span class="perk-dot">✦</span>Easy online booking, zero wait</li>
+        </ul>
+        <div class="hours-card">
+          <h4>Working Hours</h4>
+          <p>Monday – Saturday: <strong>9 AM – 8 PM</strong></p>
+          <p>Sunday: <strong>10 AM – 6 PM</strong></p>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div id="bookingPrompt">
+          <div class="prompt-icon">✂️</div>
+          <p>Please <a href="#" onclick="openModal('loginModal')">login</a> or
+             <a href="#" onclick="openModal('registerModal')">register</a> to book.</p>
+        </div>
+        <form id="bookingForm" class="hidden" onsubmit="submitBooking(event)">
+          <h3>New Appointment</h3>
+          <div class="form-group">
+            <label>Service</label>
+            <select id="bookService" required><option value="">— Choose service —</option></select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="bookDate" required/>
+            </div>
+            <div class="form-group">
+              <label>Time</label>
+              <select id="bookTime" required>
+                <option value="">— Time —</option>
+                <option>09:00 AM</option><option>09:30 AM</option><option>10:00 AM</option><option>10:30 AM</option>
+                <option>11:00 AM</option><option>11:30 AM</option><option>12:00 PM</option><option>12:30 PM</option>
+                <option>01:00 PM</option><option>01:30 PM</option><option>02:00 PM</option><option>02:30 PM</option>
+                <option>03:00 PM</option><option>03:30 PM</option><option>04:00 PM</option><option>04:30 PM</option>
+                <option>05:00 PM</option><option>05:30 PM</option><option>06:00 PM</option><option>06:30 PM</option>
+                <option>07:00 PM</option><option>07:30 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Notes <span class="optional">(optional)</span></label>
+            <textarea id="bookNotes" rows="2" placeholder="Any special requests…"></textarea>
+          </div>
+          <button type="submit" class="btn-primary full-w" id="bookBtn">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="about-cards">
+      <div class="stat-card sc1"><span class="sn">500<sup>+</sup></span><span class="sl">Happy Clients</span></div>
+      <div class="stat-card sc2"><span class="sn">12<sup>+</sup></span><span class="sl">Services</span></div>
+      <div class="stat-card sc3"><span class="sn">5★</span><span class="sl">Rating</span></div>
+      <div class="stat-orb"></div>
+    </div>
+    <div class="about-text">
+      <p class="eyebrow">Our story</p>
+      <h2 class="section-title">Crafted for your confidence</h2>
+      <p>Slique Unisex Salon was born from a simple belief — everyone deserves to look and feel their absolute best. Nestled in Thirumenahalli, Bengaluru, we combine modern techniques with personalised care.</p>
+      <p>Our team of certified stylists stay up-to-date with global trends while honouring what works best for Indian hair and skin types.</p>
+      <button class="btn-primary" onclick="scrollToSection('#booking')">Book Your Session</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-dark" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow">Find us</p>
+      <h2 class="section-title">Get in Touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="ci">📍</div><h4>Address</h4>
+        <p>Shop No 4, Next KNS Institution,<br/>opp. Haj Bhavan, Agrahara Badavane,<br/>Thirumenahalli, Bengaluru – 560064</p>
+      </div>
+      <div class="contact-card">
+        <div class="ci">📞</div><h4>Phone</h4>
+        <p><a href="tel:08050546677">080505 46677</a></p>
+        <p class="cs">Call or WhatsApp us</p>
+      </div>
+      <div class="contact-card">
+        <div class="ci">🕐</div><h4>Hours</h4>
+        <p>Mon – Sat: 9 AM – 8 PM</p>
+        <p>Sunday: 10 AM – 6 PM</p>
+      </div>
+    </div>
+    <div class="map-box">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.176!2d77.5766!3d13.0601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAzJzM2LjQiTiA3N8KwMzQnMzUuOCJF!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="logo-sl">Sl</span><span class="logo-ique">ique</span>
+      <p>Beauty crafted with care.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#home" onclick="navClick(event,'#home')">Home</a>
+      <a href="#services" onclick="navClick(event,'#services')">Services</a>
+      <a href="#booking" onclick="navClick(event,'#booking')">Book</a>
+      <a href="#contact" onclick="navClick(event,'#contact')">Contact</a>
+    </div>
+    <p class="footer-copy">© 2024 Slique Unisex Salon. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ============================================================
+     MODALS
+============================================================ -->
+
+<!-- LOGIN -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <div class="modal-brand"><span class="logo-sl">Sl</span><span class="logo-ique">ique</span></div>
+    <div id="loginS1">
+      <h2 class="modal-title">Welcome back</h2>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>Email or Phone Number</label>
+          <input type="text" id="loginId" placeholder="you@gmail.com  or  9876543210" required autocomplete="username"/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="loginPw" placeholder="••••••••" required/>
+            <button type="button" class="pw-eye" onclick="togglePw('loginPw',this)">👁</button>
+          </div>
+        </div>
+        <div class="form-err hidden" id="loginErr"></div>
+        <button type="submit" class="btn-primary full-w" id="loginBtn">Continue →</button>
+        <div class="modal-links">
+          <a href="#" onclick="switchModal('loginModal','forgotModal')">Forgot password?</a>
+          <a href="#" onclick="switchModal('loginModal','registerModal')">Create account</a>
+        </div>
+      </form>
+    </div>
+    <div id="loginS2" class="hidden">
+      <h2 class="modal-title">Enter Verification Code</h2>
+      <div class="otp-info-box" id="loginOtpInfo"></div>
+      <div class="dev-box hidden" id="loginDevBox"></div>
+      <form onsubmit="handleVerifyLogin(event)">
+        <div class="form-group">
+          <label>6-Digit Code</label>
+          <input type="text" id="loginOTP" class="otp-field" placeholder="• • • • • •" maxlength="6" inputmode="numeric" autocomplete="one-time-code" required/>
+        </div>
+        <div class="form-err hidden" id="loginOtpErr"></div>
+        <button type="submit" class="btn-primary full-w" id="loginOtpBtn">Verify &amp; Login</button>
+        <div class="resend-row">
+          <span class="timer-txt" id="loginTimerTxt"></span>
+          <button type="button" id="loginResendBtn" class="resend-btn disabled" onclick="resendOTP('login','loginResendBtn','loginTimerTxt',event)">Resend code</button>
+        </div>
+        <div class="modal-links"><a href="#" onclick="backToStep('loginS1','loginS2')">← Change credentials</a></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div class="modal-overlay" id="registerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+    <div class="modal-brand"><span class="logo-sl">Sl</span><span class="logo-ique">ique</span></div>
+    <div id="regS1">
+      <h2 class="modal-title">Create account</h2>
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="regName" placeholder="Your full name" required autocomplete="name"/>
+        </div>
+        <div class="form-group">
+          <label>Email Address <span class="req-star">*</span></label>
+          <input type="email" id="regEmail" placeholder="you@gmail.com" required autocomplete="email"/>
+          <small class="hint">OTP will be sent to this email</small>
+        </div>
+        <div class="form-group">
+          <label>Phone Number <span class="optional">(optional — for login)</span></label>
+          <div class="phone-wrap">
+            <span class="ph-prefix">+91</span>
+            <input type="tel" id="regPhone" placeholder="9876543210" maxlength="10"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="regPw" placeholder="Min 6 characters" required minlength="6"/>
+            <button type="button" class="pw-eye" onclick="togglePw('regPw',this)">👁</button>
+          </div>
+        </div>
+        <div class="form-err hidden" id="regErr"></div>
+        <button type="submit" class="btn-primary full-w" id="regBtn">Send Verification Code →</button>
+        <div class="modal-links"><a href="#" onclick="switchModal('registerModal','loginModal')">Already have an account? Login</a></div>
+      </form>
+    </div>
+    <div id="regS2" class="hidden">
+      <h2 class="modal-title">Verify Your Email</h2>
+      <div class="otp-info-box" id="regOtpInfo"></div>
+      <div class="dev-box hidden" id="regDevBox"></div>
+      <form onsubmit="handleVerifyRegister(event)">
+        <div class="form-group">
+          <label>6-Digit Code</label>
+          <input type="text" id="regOTP" class="otp-field" placeholder="• • • • • •" maxlength="6" inputmode="numeric" autocomplete="one-time-code" required/>
+        </div>
+        <div class="form-err hidden" id="regOtpErr"></div>
+        <button type="submit" class="btn-primary full-w" id="regOtpBtn">Verify &amp; Create Account</button>
+        <div class="resend-row">
+          <span class="timer-txt" id="regTimerTxt"></span>
+          <button type="button" id="regResendBtn" class="resend-btn disabled" onclick="resendOTP('register','regResendBtn','regTimerTxt',event)">Resend code</button>
+        </div>
+        <div class="modal-links"><a href="#" onclick="backToStep('regS1','regS2')">← Change details</a></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FORGOT PASSWORD -->
+<div class="modal-overlay" id="forgotModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('forgotModal')">✕</button>
+    <div class="modal-brand"><span class="logo-sl">Sl</span><span class="logo-ique">ique</span></div>
+    <div id="forgotS1">
+      <h2 class="modal-title">Forgot Password</h2>
+      <p class="modal-sub">Enter the email or phone linked to your account.</p>
+      <form onsubmit="handleForgot(event)">
+        <div class="form-group">
+          <label>Email or Phone</label>
+          <input type="text" id="forgotId" placeholder="you@gmail.com  or  9876543210" required/>
+        </div>
+        <div class="form-err hidden" id="forgotErr"></div>
+        <button type="submit" class="btn-primary full-w" id="forgotBtn">Send Reset Code →</button>
+        <div class="modal-links"><a href="#" onclick="switchModal('forgotModal','loginModal')">← Back to login</a></div>
+      </form>
+    </div>
+    <div id="forgotS2" class="hidden">
+      <h2 class="modal-title">Enter Reset Code</h2>
+      <div class="otp-info-box" id="forgotOtpInfo"></div>
+      <div class="dev-box hidden" id="forgotDevBox"></div>
+      <form onsubmit="handleVerifyForgot(event)">
+        <div class="form-group">
+          <label>6-Digit Code</label>
+          <input type="text" id="forgotOTP" class="otp-field" placeholder="• • • • • •" maxlength="6" inputmode="numeric" autocomplete="one-time-code" required/>
+        </div>
+        <div class="form-err hidden" id="forgotOtpErr"></div>
+        <button type="submit" class="btn-primary full-w" id="forgotOtpBtn">Verify Code →</button>
+        <div class="resend-row">
+          <span class="timer-txt" id="forgotTimerTxt"></span>
+          <button type="button" id="forgotResendBtn" class="resend-btn disabled" onclick="resendOTP('forgot-password','forgotResendBtn','forgotTimerTxt',event)">Resend code</button>
+        </div>
+        <div class="modal-links"><a href="#" onclick="backToStep('forgotS1','forgotS2')">← Change</a></div>
+      </form>
+    </div>
+    <div id="forgotS3" class="hidden">
+      <h2 class="modal-title">Set New Password</h2>
+      <p class="modal-sub">Code verified ✅  — choose your new password.</p>
+      <form onsubmit="handleResetPw(event)">
+        <div class="form-group">
+          <label>New Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="newPw1" placeholder="Min 6 characters" required minlength="6"/>
+            <button type="button" class="pw-eye" onclick="togglePw('newPw1',this)">👁</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="newPw2" placeholder="Repeat password" required/>
+            <button type="button" class="pw-eye" onclick="togglePw('newPw2',this)">👁</button>
+          </div>
+        </div>
+        <div class="form-err hidden" id="resetErr"></div>
+        <button type="submit" class="btn-primary full-w" id="resetBtn">Reset Password</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- CHANGE PASSWORD -->
+<div class="modal-overlay" id="changePwModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('changePwModal')">✕</button>
+    <div class="modal-brand"><span class="logo-sl">Sl</span><span class="logo-ique">ique</span></div>
+    <h2 class="modal-title">Change Password</h2>
+    <form onsubmit="handleChangePw(event)">
+      <div class="form-group">
+        <label>Current Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="curPw" placeholder="Your current password" required/>
+          <button type="button" class="pw-eye" onclick="togglePw('curPw',this)">👁</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>New Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="chgPw1" placeholder="Min 6 characters" required minlength="6"/>
+          <button type="button" class="pw-eye" onclick="togglePw('chgPw1',this)">👁</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Confirm New Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="chgPw2" placeholder="Repeat new password" required/>
+          <button type="button" class="pw-eye" onclick="togglePw('chgPw2',this)">👁</button>
+        </div>
+      </div>
+      <div class="form-err hidden" id="chgPwErr"></div>
+      <button type="submit" class="btn-primary full-w" id="chgPwBtn">Update Password</button>
+    </form>
+  </div>
+</div>
+
+<!-- CUSTOMER DASHBOARD -->
+<div class="modal-overlay" id="dashModal">
+  <div class="modal modal-xl">
+    <button class="modal-close" onclick="closeModal('dashModal')">✕</button>
+    <h2 class="modal-title">My Appointments</h2>
+    <div id="myAppts"><div class="loader-inline">Loading…</div></div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal modal-xl">
+    <button class="modal-close" onclick="closeModal('adminModal')">✕</button>
+    <h2 class="modal-title">Admin Dashboard</h2>
+    <div class="admin-stats-row" id="adminStats"></div>
+    <div class="admin-tab-bar">
+      <button class="atab active" data-tab="appts"    onclick="switchAdminTab(this)">📋 Appointments</button>
+      <button class="atab"        data-tab="services" onclick="switchAdminTab(this)">✂️ Services</button>
+      <button class="atab"        data-tab="users"    onclick="switchAdminTab(this)">👥 Users</button>
+    </div>
+
+    <!-- Appointments -->
+    <div class="admin-panel" id="tabAppts">
+      <div class="panel-toolbar">
+        <div class="filter-grp">
+          <label>Status</label>
+          <select id="apptFilter" onchange="loadAdminAppts()">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="filter-grp">
+          <label>Date</label>
+          <input type="date" id="apptDateFilter" onchange="loadAdminAppts()"/>
+          <button class="btn-sm" onclick="clearDateFilter()">Clear</button>
+        </div>
+      </div>
+      <div id="apptTableWrap"><div class="loader-inline">Loading…</div></div>
+    </div>
+
+    <!-- Services -->
+    <div class="admin-panel hidden" id="tabServices">
+      <div class="add-svc-form">
+        <h4>Add New Service</h4>
+        <div class="add-svc-row">
+          <input type="text"   id="svcName"  placeholder="Service name" class="fc"/>
+          <input type="number" id="svcPrice" placeholder="Price (₹)" min="0" class="fc"/>
+          <input type="number" id="svcDur"   placeholder="Duration (min)" min="5" value="60" class="fc"/>
+          <select id="svcCat" class="fc">
+            <option value="hair">Hair</option><option value="skin">Skin</option>
+            <option value="nails">Nails</option><option value="spa">Spa</option>
+            <option value="makeup">Makeup</option><option value="other">Other</option>
+          </select>
+        </div>
+        <textarea id="svcDesc" placeholder="Short description" rows="2" class="fc fc-full"></textarea>
+        <button class="btn-primary" onclick="addService()">+ Add Service</button>
+      </div>
+      <div id="svcTableWrap"><div class="loader-inline">Loading…</div></div>
+    </div>
+
+    <!-- Users -->
+    <div class="admin-panel hidden" id="tabUsers">
+      <div id="usersTableWrap"><div class="loader-inline">Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
